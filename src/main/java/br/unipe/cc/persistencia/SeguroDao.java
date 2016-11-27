@@ -12,6 +12,7 @@ import br.unipe.cc.models.FiltrosAbstratos;
 import br.unipe.cc.models.Seguro;
 import br.unipe.cc.utils.MontadorDeClausulas;
 import java.util.HashMap;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -44,12 +45,23 @@ public class SeguroDao extends AbstractDao<Seguro> {
 		
 	}
    
-   public void buscarUsuario(Long id) throws SeguroInexistenteException {
-        try {
-            super.buscarPorId(id);
-        } catch (EntidadeException e) {
-            throw new SeguroInexistenteException(e.getMessage() + " : Este seguro não existe");
+   public List<Seguro> buscarSeguro(String CPFCliente) throws SeguroInexistenteException {
+         String sql = "SELECT s FROM Seguro s ";
+
+        HashMap<String, String> condicao = new HashMap<String, String>();
+        condicao.put("s.cliente.CPF", CPFCliente);
+
+        FiltrosAbstratos filtros = new FiltrosAbstratos(condicao);
+
+        sql += mount.montarClausula(filtros);
+        
+        List<Seguro> seguros = super.buscarTodasEntidade(sql);
+        
+        if (seguros.isEmpty()) {
+            throw new SeguroInexistenteException("Este cliente não possui seguro");
         }
+        
+        return seguros;
 
     }
 

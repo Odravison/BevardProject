@@ -12,6 +12,7 @@ import br.unipe.cc.models.FiltrosAbstratos;
 import br.unipe.cc.models.Cliente;
 import br.unipe.cc.utils.MontadorDeClausulas;
 import java.util.HashMap;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -47,21 +48,38 @@ public class ClienteDao extends AbstractDao<Cliente> {
         super.salvar(cliente);
     }
 
-    public void removerCliente(Long id) throws ClienteInexistenteException {
+    public void removerCliente(String CPF) throws ClienteInexistenteException {
+        Cliente cliente = null;
+        
         try {
-            super.remover(id);
+            cliente = buscarCliente(CPF);
+            if (cliente != null){
+                remover(cliente.getId());
+            }
         } catch (EntidadeException e) {
-            throw new ClienteInexistenteException(e.getMessage() + " : Cliente apagado");
+            throw new ClienteInexistenteException(e.getMessage() + " : Cliente não pôde ser apagado");
         }
 
     }
 
-    public void buscarCliente(Long id) throws ClienteInexistenteException {
-        try {
-            super.buscarPorId(id);
-        } catch (EntidadeException e) {
-            throw new ClienteInexistenteException(e.getMessage() + " : Este cliente não está cadastrado");
+    public Cliente buscarCliente(String CPF) throws ClienteInexistenteException {
+        
+        String sql = "SELECT c FROM Cliente c ";
+
+        HashMap<String, String> condicao = new HashMap<String, String>();
+        condicao.put("CPF", CPF);
+
+        FiltrosAbstratos filtros = new FiltrosAbstratos(condicao);
+
+        sql += mount.montarClausula(filtros);
+        
+        List<Cliente> clientes = super.buscarTodasEntidade(sql);
+        
+        if (clientes.isEmpty()) {
+            throw new ClienteInexistenteException("Este cliente não está cadastrado");
         }
+        
+        return clientes.get(0);
 
     }
     

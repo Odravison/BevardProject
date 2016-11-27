@@ -12,6 +12,7 @@ import br.unipe.cc.models.FiltrosAbstratos;
 import br.unipe.cc.models.User;
 import br.unipe.cc.utils.MontadorDeClausulas;
 import java.util.HashMap;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -47,23 +48,40 @@ public class UserDao extends AbstractDao<User> {
         super.salvar(user);
     }
 
-    public void removerUser(Long id) throws UserInexistenteException {
+    public void removerUser(String CPF) throws UserInexistenteException {
+         User user = null;
+        
         try {
-            super.remover(id);
+            user = buscarUser(CPF);
+            if (user != null){
+                remover(user.getId());
+            }
         } catch (EntidadeException e) {
-            throw new UserInexistenteException(e.getMessage() + " : Usuário apagado");
+            throw new UserInexistenteException(e.getMessage() + " : user não pôde ser apagado");
         }
 
     }
 
-    public void buscarUser(Long id) throws UserInexistenteException {
-        try {
-            super.buscarPorId(id);
-        } catch (EntidadeException e) {
-            throw new UserInexistenteException(e.getMessage() + " : Este usuário não está cadastrado");
+    public User buscarUser(String CPF) throws UserInexistenteException {
+        String sql = "SELECT u FROM User u ";
+
+        HashMap<String, String> condicao = new HashMap<String, String>();
+        condicao.put("CPF", CPF);
+
+        FiltrosAbstratos filtros = new FiltrosAbstratos(condicao);
+
+        sql += mount.montarClausula(filtros);
+        
+        List<User> users = super.buscarTodasEntidade(sql);
+        
+        if (users.isEmpty()) {
+            throw new UserInexistenteException("Este usuário não está cadastrado");
         }
+        
+        return users.get(0);
 
     }
+    
     
     public void editarUser(User usuario) throws UserInexistenteException {
 		try {
@@ -73,6 +91,5 @@ public class UserDao extends AbstractDao<User> {
 		}
 		
 	}
-
 
 }
