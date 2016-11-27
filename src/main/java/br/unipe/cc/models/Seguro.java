@@ -7,8 +7,15 @@ package br.unipe.cc.models;
 
 /**
  *
- * @author Felipe
+ * @author Tiago
  */
-public class Seguro {
-    
+public class Seguro extends EntidadePersistivel{
+    private String descricaoContrato;
+    private Veiculo veiculo;
+    private Pessoa cliente;
+    public Seguro(String descricaoContrato){
+           this.descricaoContrato = descricaoContrato;
+        }
+
+	
 }

@@ -5,10 +5,7 @@
  */
 package br.unipe.cc.models;
 
-/**
- *
- * @author Felipe
- */
+
 /**
  *
  * @author Tiago
@@ -23,26 +20,29 @@ public class User extends Pessoa {
             super(email,matricula, CPF, endereco, nome);
         }
      
-	 /** Compara a String digitada com um dado salvo se for igual retorna true,
-	 * caso contrario retorna false
-	 */
 	public boolean autentica(String CPF, String senha) {
-		if (!this.senha.equals(senha))
+		if (!this.senha.equals(senha)&&!this.getCPF().equals(CPF))
 			return false;
-		// pode fazer outras possoveis verificacoes
+		// pode fazer outras possoveis verificacoes(email)
 
 		return true;
 	}
 	
 
-
-	public String getCargo() {
-		return cargo;
+    public String getCargo() {
+    		return cargo;
 	}
-
-	public void setCargo(String cargo) {
+    public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
+        
+    public String getSenha() {
+            return senha;
+        }
+        
+    public void setSenha(String senha) {
+         this.senha = senha;
+        }
 
-	// -------------------------------------------------------
+
 }
