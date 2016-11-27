@@ -5,16 +5,27 @@
  */
 package br.unipe.cc.views;
 
+import br.unipe.cc.controllers.UserController;
+import br.unipe.cc.exceptions.UserExistenteException;
+import br.unipe.cc.models.User;
+import java.awt.Dialog;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.scene.control.Alert;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author João Felipe
  */
 public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
+    UserController userController;
 
     /**
      * Creates new form telaCadastrarUsuario
      */
     public telaCadastrarUsuario() {
+        userController = UserController.getInstance();
         initComponents();
     }
 
@@ -33,7 +44,7 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        loginField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setClosable(true);
@@ -52,6 +63,11 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
         jLabel3.setText("Confirmar Senha");
 
         jButton1.setText("Salvar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -64,7 +80,7 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                    .addComponent(jTextField3)
+                    .addComponent(loginField)
                     .addComponent(jTextField2))
                 .addContainerGap(47, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -78,7 +94,7 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loginField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,6 +126,25 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        if (!(loginField.getText().isEmpty() 
+                || jTextField1.getText().isEmpty() 
+                || jTextField2.getText().isEmpty())){
+            
+            User user = new User(loginField.getText(), null, "1234567", null, "João", null, jTextField1.getText());
+            try {
+                userController.cadastrarUsuario(user);
+                JOptionPane.showConfirmDialog(null, "Usuário cadastrado com sucesso");
+            } catch (UserExistenteException ex) {
+                JOptionPane.showMessageDialog(null, "Esse CPF já foi usado para outro usuário");
+                Logger.getLogger(telaCadastrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        JOptionPane.showMessageDialog(null, "Você esqueceu de inserir algum parâmetro.");
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -119,6 +154,6 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField loginField;
     // End of variables declaration//GEN-END:variables
 }
