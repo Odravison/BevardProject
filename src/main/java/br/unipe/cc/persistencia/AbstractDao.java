@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.unipe.cc.DAO;
+package br.unipe.cc.persistencia;
 
 import br.unipe.cc.exceptions.EntidadeException;
 import br.unipe.cc.models.EntidadePersistivel;
