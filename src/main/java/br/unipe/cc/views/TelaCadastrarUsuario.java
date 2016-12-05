@@ -18,13 +18,13 @@ import javax.swing.JOptionPane;
  *
  * @author João Felipe
  */
-public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
+public class TelaCadastrarUsuario extends javax.swing.JInternalFrame {
     UserController userController;
 
     /**
      * Creates new form telaCadastrarUsuario
      */
-    public telaCadastrarUsuario() {
+    public TelaCadastrarUsuario() {
         userController = UserController.getInstance();
         initComponents();
     }
@@ -40,12 +40,12 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        loginField = new javax.swing.JTextField();
+        ReceberLogin = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        ReceberSenha1 = new javax.swing.JPasswordField();
+        ReceberConfirmarSenha = new javax.swing.JPasswordField();
 
         setClosable(true);
         setTitle("Cadastrar Usuário");
@@ -53,12 +53,6 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
         jLabel1.setText("Login");
 
         jLabel2.setText("Senha");
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Confirmar Senha");
 
@@ -68,25 +62,30 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(29, 29, 29))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
-                    .addComponent(loginField)
-                    .addComponent(jTextField2))
+                    .addComponent(ReceberLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                    .addComponent(ReceberSenha1)
+                    .addComponent(ReceberConfirmarSenha))
                 .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,18 +93,18 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(loginField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ReceberLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(jLabel2)
+                .addGap(11, 11, 11)
+                .addComponent(ReceberSenha1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ReceberConfirmarSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,22 +121,18 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (!(loginField.getText().isEmpty() 
-                || jTextField1.getText().isEmpty() 
-                || jTextField2.getText().isEmpty())){
+        if (!(ReceberLogin.getText().isEmpty() 
+                || ReceberSenha1.getText().isEmpty() 
+                || ReceberConfirmarSenha.getText().isEmpty())){
             
-            User user = new User(loginField.getText(), null, "1234567", null, "João", null, jTextField1.getText());
+            User user = new User(ReceberLogin.getText(), null, "1234567", null, "João", null, ReceberSenha1.getText(), null);
             try {
                 userController.cadastrarUsuario(user);
                 JOptionPane.showConfirmDialog(null, "Usuário cadastrado com sucesso");
             } catch (UserExistenteException ex) {
                 JOptionPane.showMessageDialog(null, "Esse CPF já foi usado para outro usuário");
-                Logger.getLogger(telaCadastrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TelaCadastrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -145,15 +140,23 @@ public class telaCadastrarUsuario extends javax.swing.JInternalFrame {
         JOptionPane.showMessageDialog(null, "Você esqueceu de inserir algum parâmetro.");
     }//GEN-LAST:event_jButton1MouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+       JOptionPane.showMessageDialog(null, "Dados cadasTrados com sucesso");
+       
+        
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField ReceberConfirmarSenha;
+    private javax.swing.JTextField ReceberLogin;
+    private javax.swing.JPasswordField ReceberSenha1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField loginField;
     // End of variables declaration//GEN-END:variables
 }

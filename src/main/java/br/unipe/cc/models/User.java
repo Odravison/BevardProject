@@ -28,7 +28,7 @@ public class User extends EntidadePersistivel {
     private String endereco;
     private String nome;
 
-    public User(String email, Integer matricula, String CPF, String endereco, String nome, String cargo, String senha) {
+    public User(String email, Integer matricula, String CPF, String endereco, String nome, String cargo, String senha, String telefone) {
         this.cargo = cargo;
         this.senha = senha;
         this.email = email;

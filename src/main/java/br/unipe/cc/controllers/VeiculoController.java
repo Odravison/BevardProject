@@ -15,8 +15,9 @@ import br.unipe.cc.persistencia.VeiculoDao;
  * @author odravison
  */
 public class VeiculoController {
+    // dependendo uso de sigleton
     
-    private static VeiculoController veiculoController;
+    private static VeiculoController instaceVeiculoController = new VeiculoController();
     private final VeiculoDao userDao;
     
     private VeiculoController(){
@@ -24,11 +25,11 @@ public class VeiculoController {
     }
     
     public static VeiculoController getInstance(){
-        if (veiculoController == null){
-         veiculoController = new VeiculoController();
+        if (instaceVeiculoController == null){
+         instaceVeiculoController = new VeiculoController();
         }
         
-        return veiculoController;
+        return instaceVeiculoController;
     }
 
     public VeiculoDao getVeiculoDao() {

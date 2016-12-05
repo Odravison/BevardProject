@@ -11,7 +11,7 @@ public class EMFactory {
 	private EntityManager em = null;
 	
 	private EMFactory(){
-		this.emf = Persistence.createEntityManagerFactory("kbmaisumdb");
+		this.emf = Persistence.createEntityManagerFactory("bevard");
 		this.em = emf.createEntityManager();
 	}
 	

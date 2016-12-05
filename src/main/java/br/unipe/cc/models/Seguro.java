@@ -23,6 +23,15 @@ public class Seguro extends EntidadePersistivel {
     private String descricaoContrato;
     private Veiculo veiculo;
     private Cliente cliente;
+    
+    
+    public Seguro(String decricaoContrato, Veiculo veiculo, Cliente cliente) {
+        this.descricaoContrato = descricaoContrato;
+        this.veiculo = veiculo;
+        this.cliente = cliente;
+              
+    }
+    
 
     public Seguro(String descricaoContrato) {
         this.descricaoContrato = descricaoContrato;

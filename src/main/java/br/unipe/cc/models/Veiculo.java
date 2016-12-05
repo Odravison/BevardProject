@@ -10,37 +10,42 @@ package br.unipe.cc.models;
  * @author Felipe
  */
 public class Veiculo extends EntidadePersistivel{
-        private Long ID;
-	private String cor;
+        private Long ID;    // alterei de Long para String ----ATENÇÃO----
+	private String ano;   // alterei de cor para ano
 	private String alteracoesFeitas;
 	private String chassi;
         private String placa;
 	private String problemas;
+        private String escuderia;
        	
 
 
-	public Veiculo(String alteracoesFeitas,String cor, String placa, String chassi) {
-		this.cor = cor;
-		this.placa = placa;
-		this.chassi = chassi;
+	public Veiculo(String ano, String alteracoesFeitas, String chassi, String placa, String problemas, String escuderia) {
+		this.ano = ano;                
                 this.alteracoesFeitas = alteracoesFeitas;
+		this.chassi = chassi;
+                this.placa = placa;
+                this.problemas = problemas;
+                this.escuderia = escuderia;
+		
+               
                
 	}
 
-	public Veiculo(String alteracoesFeitas,String cor, String placa, String chassi, String alteracoes) {
-		this.cor = cor;
-		this.placa = placa;
-		this.chassi = chassi;
-		this.alteracoesFeitas = alteracoes;
-                this.alteracoesFeitas = alteracoesFeitas;
-        }
-
-    public String getCor() {
-        return cor;
+    public String getEscuderia() {
+        return escuderia;
     }
 
-    public void setCor(String cor) {
-        this.cor = cor;
+    public void setEscuderia(String escuderia) {
+        this.escuderia = escuderia;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
     }
 
     public String getAlteracoes() {
